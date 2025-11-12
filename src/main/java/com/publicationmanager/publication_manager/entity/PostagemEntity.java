@@ -18,13 +18,13 @@ public class PostagemEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true, nullable = false, length = 64)
+    @Column(name = "autor")
     private String autor;
 
-
+    @Column(name = "data")
     private LocalDate dataPublicacao;
 
-    @Column(length = 500)
+    @Column(name = "conteudo")
     private String conteudo;
 
     public Integer getId() {
