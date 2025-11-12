@@ -1,21 +1,15 @@
-package com.publicationmanager.publication_manager;
+package com.publicationmanager.publication_manager.dto;
 
-
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+public class PostagemDto {
 
-public class Postagem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
 
     private String titulo;
+
 
     private String autor;
 
@@ -23,17 +17,16 @@ public class Postagem {
 
     private String conteudo;
 
-    public Postagem(String titulo, String autor, LocalDate dataPublicacao, String conteudo) {
+    public PostagemDto() {
+
+    }
+
+    public PostagemDto(String titulo, String autor, LocalDate dataPublicacao, String conteudo) {
         this.titulo = titulo;
         this.autor = autor;
         this.dataPublicacao = dataPublicacao;
         this.conteudo = conteudo;
     }
-
-    public boolean isPublicado() {
-        return !dataPublicacao.isAfter(LocalDate.now());
-    }
-
 
     public String getTitulo() {
         return titulo;
@@ -66,4 +59,5 @@ public class Postagem {
     public void setConteudo(String conteudo) {
         this.conteudo = conteudo;
     }
+
 }
