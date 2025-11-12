@@ -1,12 +1,25 @@
 package com.publicationmanager.publication_manager;
 
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 
 public class Postagem {
+
+    @NotBlank(message = "O título é obrigatório")
     private String titulo;
+
+    @NotBlank(message = "Obrigatório informar o autor")
     private String autor;
+
+    @NotBlank(message = "A data de publicação é obrigatória")
     private LocalDate dataPublicacao;
+
+    @NotBlank(message = "O conteúdo é obrigatório")
+    @Size(min = 10, message = "O conteúdo deve ter no mínimo 10 caracteres")
     private String conteudo;
 
     public Postagem(String titulo, String autor, LocalDate dataPublicacao, String conteudo) {
@@ -19,6 +32,7 @@ public class Postagem {
     public boolean isPublicado() {
         return !dataPublicacao.isAfter(LocalDate.now());
     }
+
 
     public String getTitulo() {
         return titulo;
