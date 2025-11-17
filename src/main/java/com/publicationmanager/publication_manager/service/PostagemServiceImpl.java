@@ -16,23 +16,23 @@ public class PostagemServiceImpl implements PostagemService {
     @Autowired
     private PostagemRepository postagemRepository;
 
-    public PostagemDto toDto(PostagemEntity post) {
-        PostagemDto postagemDto = new PostagemDto();
-        postagemDto.setAutor(post.getAutor());
-        postagemDto.setTitulo(post.getTitulo());
-        postagemDto.setDataPublicacao(post.getDataPublicacao());
-        postagemDto.setConteudo(post.getConteudo());
-
-        return postagemDto;
+    private PostagemDto toDto(PostagemEntity post) {
+        PostagemDto dto = new PostagemDto();
+        dto.setId(post.getId());
+        dto.setAutor(post.getAutor());
+        dto.setTitulo(post.getTitulo());
+        dto.setDataPublicacao(post.getDataPublicacao());
+        dto.setConteudo(post.getConteudo());
+        return dto;
     }
 
     public PostagemEntity toEntity(PostagemDto postDto) {
         PostagemEntity postEnt = new PostagemEntity();
+        postEnt.setId(postDto.getId());
         postEnt.setAutor(postDto.getAutor());
         postEnt.setTitulo(postDto.getTitulo());
         postEnt.setDataPublicacao(postDto.getDataPublicacao());
         postEnt.setConteudo(postDto.getConteudo());
-
         return postEnt;
     }
 
@@ -40,7 +40,7 @@ public class PostagemServiceImpl implements PostagemService {
     public PostagemDto findById(Integer id) {
         Optional<PostagemEntity> postagemEntity = postagemRepository.findById(id);
         if (postagemEntity.isEmpty()) {
-            throw new RuntimeException("Não foi possivel encontrar o post pelo seu id");
+            throw new RuntimeException("Post não encontrado: " + id);
         }
         return toDto(postagemEntity.get());
     }
@@ -57,17 +57,12 @@ public class PostagemServiceImpl implements PostagemService {
     }
 
     @Override
-    public PostagemDto addNew(PostagemDto postDto) {
-        PostagemEntity postEntity = new PostagemEntity();
-        postEntity.setAutor(postDto.getAutor());
-        postEntity.setTitulo(postDto.getTitulo());
-        postEntity.setDataPublicacao(postDto.getDataPublicacao());
-        postEntity.setConteudo(postDto.getConteudo());
-
-        postagemRepository.save(postEntity);
-
-        return postDto;
+    public PostagemDto addNew(PostagemDto dto) {
+        PostagemEntity entity = toEntity(dto);
+        PostagemEntity salvo = postagemRepository.save(entity);
+        return toDto(salvo);
     }
+
 
     @Override
     public PostagemDto delete(Integer id) {
