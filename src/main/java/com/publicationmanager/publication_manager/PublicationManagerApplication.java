@@ -9,5 +9,4 @@ public class PublicationManagerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PublicationManagerApplication.class, args);
 	}
-
 }
