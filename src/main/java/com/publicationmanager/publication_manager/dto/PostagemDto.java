@@ -1,33 +1,27 @@
 package com.publicationmanager.publication_manager.dto;
 
-import jakarta.validation.constraints.FutureOrPresent;
+
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+
 public class PostagemDto {
 
-    private Integer id;
-
+    @NotBlank(message = "O título é obrigatório")
     private String titulo;
 
+    @NotBlank(message = "O autor é obrigatório")
     private String autor;
 
+    @NotNull(message = "A data de publicação é obrigatória")
     private LocalDate dataPublicacao;
 
+    @NotBlank(message = "O conteúdo é obrigatório")
+    @Size(min = 10, message = "O conteúdo deve ter no mínimo 10 caracteres")
     private String conteudo;
-
-    private boolean postpublicado;
-
-
-    private boolean postPublicado() {
-        return postpublicado;
-    }
-
-    public PostagemDto() {
-
-    }
 
     public PostagemDto(String titulo, String autor, LocalDate dataPublicacao, String conteudo) {
         this.titulo = titulo;
@@ -36,13 +30,14 @@ public class PostagemDto {
         this.conteudo = conteudo;
     }
 
-    public Integer getId() {
-        return id;
+    public PostagemDto() {
+
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public boolean isPublicado() {
+        return !dataPublicacao.isAfter(LocalDate.now());
     }
+
 
     public String getTitulo() {
         return titulo;
@@ -74,13 +69,5 @@ public class PostagemDto {
 
     public void setConteudo(String conteudo) {
         this.conteudo = conteudo;
-    }
-
-    public boolean isPostpublicado() {
-        return postpublicado;
-    }
-
-    public void setPostpublicado(boolean postpublicado) {
-        this.postpublicado = postpublicado;
     }
 }

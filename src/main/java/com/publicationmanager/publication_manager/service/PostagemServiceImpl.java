@@ -18,25 +18,20 @@ public class PostagemServiceImpl implements PostagemService {
 
     public PostagemDto toDto(PostagemEntity post) {
         PostagemDto postagemDto = new PostagemDto();
-        postagemDto.setId(post.getId());
         postagemDto.setAutor(post.getAutor());
         postagemDto.setTitulo(post.getTitulo());
         postagemDto.setDataPublicacao(post.getDataPublicacao());
         postagemDto.setConteudo(post.getConteudo());
-        postagemDto.setPostpublicado(post.isPostPublicado());
 
         return postagemDto;
     }
 
     public PostagemEntity toEntity(PostagemDto postDto) {
         PostagemEntity postEnt = new PostagemEntity();
-
-        postEnt.setId(postDto.getId());
         postEnt.setAutor(postDto.getAutor());
         postEnt.setTitulo(postDto.getTitulo());
         postEnt.setDataPublicacao(postDto.getDataPublicacao());
         postEnt.setConteudo(postDto.getConteudo());
-        postEnt.setPostPublicado(postDto.isPostpublicado());
 
         return postEnt;
     }
@@ -55,7 +50,7 @@ public class PostagemServiceImpl implements PostagemService {
         List<PostagemEntity> listaEntitys = postagemRepository.findAll();
         List<PostagemDto> listaDtos = new ArrayList<PostagemDto>();
 
-        for(PostagemEntity entity : listaEntitys) {
+        for (PostagemEntity entity : listaEntitys) {
             listaDtos.add(toDto(entity));
         }
         return listaDtos;
@@ -68,11 +63,20 @@ public class PostagemServiceImpl implements PostagemService {
         postEntity.setTitulo(postDto.getTitulo());
         postEntity.setDataPublicacao(postDto.getDataPublicacao());
         postEntity.setConteudo(postDto.getConteudo());
-        postEntity.setPostPublicado(postDto.isPostpublicado());
 
         postagemRepository.save(postEntity);
 
         return postDto;
+    }
+
+    @Override
+    public PostagemDto delete(Integer id) {
+        return null;
+    }
+
+    @Override
+    public PostagemDto update(Integer id, PostagemDto dto) {
+        return null;
     }
 
 }
