@@ -32,10 +32,15 @@ public class PostagemEntity {
     @Column(name = "data")
     private LocalDate dataPublicacao;
 
+    @Column(name = "postpublicado")
+    private boolean postPublicado;
+
+
     @NotBlank(message = "O conteúdo é obrigatório")
     @Size(min = 10, message = "O conteúdo deve ter no mínimo 10 caracteres")
     @Column(name = "conteudo")
     private String conteudo;
+
 
     public Integer getId() {
         return id;
@@ -43,6 +48,14 @@ public class PostagemEntity {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getAutor() {
@@ -67,5 +80,13 @@ public class PostagemEntity {
 
     public void setConteudo(String conteudo) {
         this.conteudo = conteudo;
+    }
+
+    public boolean isPostPublicado() {
+        return postPublicado;
+    }
+
+    public void setPostPublicado(boolean postPublicado) {
+        this.postPublicado = postPublicado;
     }
 }

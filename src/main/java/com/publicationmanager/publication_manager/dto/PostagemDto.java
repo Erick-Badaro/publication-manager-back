@@ -1,5 +1,6 @@
 package com.publicationmanager.publication_manager.dto;
 
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -7,15 +8,22 @@ import java.time.LocalDate;
 
 public class PostagemDto {
 
+    private Integer id;
 
     private String titulo;
-
 
     private String autor;
 
     private LocalDate dataPublicacao;
 
     private String conteudo;
+
+    private boolean postpublicado;
+
+
+    private boolean postPublicado() {
+        return postpublicado;
+    }
 
     public PostagemDto() {
 
@@ -26,6 +34,14 @@ public class PostagemDto {
         this.autor = autor;
         this.dataPublicacao = dataPublicacao;
         this.conteudo = conteudo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -60,4 +76,11 @@ public class PostagemDto {
         this.conteudo = conteudo;
     }
 
+    public boolean isPostpublicado() {
+        return postpublicado;
+    }
+
+    public void setPostpublicado(boolean postpublicado) {
+        this.postpublicado = postpublicado;
+    }
 }

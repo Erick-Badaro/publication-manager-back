@@ -1,4 +1,4 @@
-package com.publicationmanager.publication_manager.repository;
+package com.publicationmanager.publication_manager.service;
 
 import com.publicationmanager.publication_manager.dto.PostagemDto;
 
