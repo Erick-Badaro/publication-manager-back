@@ -47,4 +47,10 @@ public class PostagemController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity update(@PathVariable Integer id, @Valid @RequestBody PostagemDto dto){
+        service.update(id, dto);
+        return ResponseEntity.noContent().build();
+    }
+
 }
