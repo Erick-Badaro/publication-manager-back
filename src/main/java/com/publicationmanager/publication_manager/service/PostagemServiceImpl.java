@@ -74,7 +74,16 @@ public class PostagemServiceImpl implements PostagemService {
 
     @Override
     public PostagemDto update(Integer id, PostagemDto dto) {
-        return null;
+        PostagemEntity entity = postagemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Post não encontrado: " + id));
+
+        entity.setAutor(dto.getAutor());
+        entity.setTitulo(dto.getTitulo());
+        entity.setDataPublicacao(dto.getDataPublicacao());
+        entity.setConteudo(dto.getConteudo());
+        PostagemEntity atualizado = postagemRepository.save(entity);
+        return toDto(atualizado);
+
     }
 
 }
