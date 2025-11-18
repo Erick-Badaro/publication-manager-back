@@ -66,7 +66,10 @@ public class PostagemServiceImpl implements PostagemService {
 
     @Override
     public PostagemDto delete(Integer id) {
-        return null;
+       PostagemEntity entity = postagemRepository.findById(id)
+               .orElseThrow(() ->  new RuntimeException("Post não encontrado: " + id));
+       postagemRepository.delete(entity);
+       return toDto(entity);
     }
 
     @Override

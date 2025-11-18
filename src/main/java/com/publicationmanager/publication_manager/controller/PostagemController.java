@@ -3,6 +3,7 @@ package com.publicationmanager.publication_manager.controller;
 import com.publicationmanager.publication_manager.dto.PostagemDto;
 import com.publicationmanager.publication_manager.service.PostagemService;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,12 @@ public class PostagemController {
                 .buildAndExpand(novaPostagem.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
