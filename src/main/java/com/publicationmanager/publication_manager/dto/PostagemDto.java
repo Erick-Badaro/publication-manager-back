@@ -38,7 +38,7 @@ public class PostagemDto {
 
     }
 
-    @JsonIgnore // Anotação para ignorar este método no Swagger
+
     public boolean isPublicado() {
         return !dataPublicacao.isAfter(LocalDate.now());
     }
@@ -81,6 +81,10 @@ public class PostagemDto {
 
     public void setConteudo(String conteudo) {
         this.conteudo = conteudo;
+    }
+
+    public boolean getPublicado() {
+        return isPublicado();
     }
 
 
